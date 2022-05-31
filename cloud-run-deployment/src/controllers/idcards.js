@@ -11,7 +11,7 @@ const createIdCard = async (req, res) => {
       province: req.body.province,
       district: req.body.district,
       id_number: req.body.id_number,
-      full_name: req.body.full_name,
+      name: req.body.name,
       place_date_of_birth: req.body.place_date_of_birth,
       gender: req.body.gender,
       blood_type: req.body.blood_type,
@@ -24,6 +24,7 @@ const createIdCard = async (req, res) => {
       occupation: req.body.occupation,
       nationality: req.body.nationality,
       expiry_date: req.body.expiry_date,
+      attachment: req.body.attachment,
     };
 
     await db.collection('id_cards').doc(uid).set(data);
@@ -42,14 +43,21 @@ const createIdCard = async (req, res) => {
 
 const getIdCards = async (req, res) => {
   try {
+    const { name } = req.query;
+
     const idCardsRef = db.collection('id_cards');
     const snapshot = await idCardsRef.get();
 
-    const docs = [];
+    let docs = snapshot.docs.map((doc) => doc.data());
 
-    if (!snapshot.empty) {
-      snapshot.forEach((doc) => docs.push(doc.data()));
+    if (name) {
+      docs = docs
+        .filter((doc) => (
+          doc.name.toLowerCase().includes(name.toLowerCase())
+        ));
+    }
 
+    if (docs.length > 0) {
       res.status(200).json(docs);
     } else {
       res.status(404).json({
@@ -93,11 +101,11 @@ const updateIdCard = async (req, res) => {
     const { uid } = req.params;
 
     const data = {
-      uid,
+      uid: req.body.uid,
       province: req.body.province,
       district: req.body.district,
       id_number: req.body.id_number,
-      full_name: req.body.full_name,
+      name: req.body.name,
       place_date_of_birth: req.body.place_date_of_birth,
       gender: req.body.gender,
       blood_type: req.body.blood_type,
@@ -110,6 +118,7 @@ const updateIdCard = async (req, res) => {
       occupation: req.body.occupation,
       nationality: req.body.nationality,
       expiry_date: req.body.expiry_date,
+      attachment: req.body.attachment,
     };
 
     await db.collection('id_cards').doc(uid).update(data);

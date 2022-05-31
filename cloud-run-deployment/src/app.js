@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const isAuthenticated = require('./middlewares/auth');
-const idCards = require('./routes/idcards.route');
+const idCards = require('./routes/idcards');
 
 process.env.GOOGLE_APPLICATION_CREDENTIALS = './serviceAccountKeyGoogleCloud.json';
 

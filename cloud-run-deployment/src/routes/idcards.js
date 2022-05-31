@@ -1,7 +1,7 @@
 const express = require('express');
 const {
   createIdCard, getIdCards, getIdCard, updateIdCard, deleteIdCard,
-} = require('../controllers/idcards.controller');
+} = require('../controllers/idcards');
 
 const router = express.Router();
 

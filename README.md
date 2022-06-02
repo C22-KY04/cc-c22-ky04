@@ -1,3 +1,7 @@
+## Cloud Architecture Diagram
+
+![](./cloud-architecture-diagram/architecture.png)
+
 ## Cloud Functions Deployment
 
 ## Cloud Run Deployment

@@ -65,21 +65,21 @@ HTTP Response Status Codes  &nbsp;&nbsp; **201**
 }
 ```
 
-HTTP Response Status Codes  &nbsp;&nbsp; **401**
-
-```json
-{
-    "status": "Unauthorized",
-    "message": "You do not have permissions to access the service."
-}
-```
-
 HTTP Response Status Codes  &nbsp;&nbsp; **400**
 
 ```json
 {
     "status": "Bad Request",
     "message": "Error message..."
+}
+```
+
+HTTP Response Status Codes  &nbsp;&nbsp; **401**
+
+```json
+{
+    "status": "Unauthorized",
+    "message": "You do not have permissions to access the service."
 }
 ```
 
@@ -164,6 +164,15 @@ HTTP Response Status Codes  &nbsp;&nbsp; **200**
 ]
 ```
 
+HTTP Response Status Codes  &nbsp;&nbsp; **400**
+
+```json
+{
+    "status": "Bad Request",
+    "message": "Error message..."
+}
+```
+
 HTTP Response Status Codes  &nbsp;&nbsp; **401**
 
 ```json
@@ -173,12 +182,12 @@ HTTP Response Status Codes  &nbsp;&nbsp; **401**
 }
 ```
 
-HTTP Response Status Codes  &nbsp;&nbsp; **400**
+HTTP Response Status Codes  &nbsp;&nbsp; **404**
 
 ```json
 {
-    "status": "Bad Request",
-    "message": "Error message..."
+    "status": "Not Found",
+    "message": "The item/record not found."
 }
 ```
 
@@ -241,6 +250,15 @@ HTTP Response Status Codes  &nbsp;&nbsp; **200**
 }
 ```
 
+HTTP Response Status Codes  &nbsp;&nbsp; **400**
+
+```json
+{
+    "status": "Bad Request",
+    "message": "Error message..."
+}
+```
+
 HTTP Response Status Codes  &nbsp;&nbsp; **401**
 
 ```json
@@ -250,12 +268,12 @@ HTTP Response Status Codes  &nbsp;&nbsp; **401**
 }
 ```
 
-HTTP Response Status Codes  &nbsp;&nbsp; **400**
+HTTP Response Status Codes  &nbsp;&nbsp; **404**
 
 ```json
 {
-    "status": "Bad Request",
-    "message": "Error message..."
+    "status": "Not Found",
+    "message": "The item/record not found."
 }
 ```
 
@@ -327,21 +345,21 @@ HTTP Response Status Codes  &nbsp;&nbsp; **200**
 }
 ```
 
-HTTP Response Status Codes  &nbsp;&nbsp; **401**
-
-```json
-{
-    "status": "Unauthorized",
-    "message": "You do not have permissions to access the service."
-}
-```
-
 HTTP Response Status Codes  &nbsp;&nbsp; **400**
 
 ```json
 {
     "status": "Bad Request",
     "message": "Error message..."
+}
+```
+
+HTTP Response Status Codes  &nbsp;&nbsp; **401**
+
+```json
+{
+    "status": "Unauthorized",
+    "message": "You do not have permissions to access the service."
 }
 ```
 
@@ -388,20 +406,20 @@ HTTP Response Status Codes  &nbsp;&nbsp; **200**
 }
 ```
 
-HTTP Response Status Codes  &nbsp;&nbsp; **401**
-
-```json
-{
-    "status": "Unauthorized",
-    "message": "You do not have permissions to access the service."
-}
-```
-
 HTTP Response Status Codes  &nbsp;&nbsp; **400**
 
 ```json
 {
     "status": "Bad Request",
     "message": "Error message..."
+}
+```
+
+HTTP Response Status Codes  &nbsp;&nbsp; **401**
+
+```json
+{
+    "status": "Unauthorized",
+    "message": "You do not have permissions to access the service."
 }
 ```

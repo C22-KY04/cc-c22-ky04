@@ -31,7 +31,7 @@ const createIdCard = async (req, res) => {
 
     res.status(201).json({
       status: 'Created',
-      message: 'Successfully added ID Card',
+      message: 'The item/record was created successfully.',
     });
   } catch (error) {
     res.status(400).json({
@@ -62,7 +62,7 @@ const getIdCards = async (req, res) => {
     } else {
       res.status(404).json({
         status: 'Not Found',
-        message: 'ID card not found',
+        message: 'The item/record not found.',
       });
     }
   } catch (error) {
@@ -85,7 +85,7 @@ const getIdCard = async (req, res) => {
     } else {
       res.status(404).json({
         status: 'Not Found',
-        message: 'ID card not found',
+        message: 'The item/record not found.',
       });
     }
   } catch (error) {
@@ -125,7 +125,7 @@ const updateIdCard = async (req, res) => {
 
     res.status(200).json({
       status: 'OK',
-      message: 'Successfully updated ID Card',
+      message: 'The item/record was updated successfully.',
     });
   } catch (error) {
     res.status(400).json({
@@ -143,7 +143,7 @@ const deleteIdCard = async (req, res) => {
 
     res.status(200).json({
       status: 'OK',
-      message: 'Successfully delete ID Card',
+      message: 'The item/record was deleted successfully.',
     });
   } catch (error) {
     res.status(400).json({

@@ -120,48 +120,52 @@ Response &nbsp;&nbsp; `application/json`
 HTTP Response Status Codes  &nbsp;&nbsp; **200**
 
 ```json
-[
-    {
-        "uid": "q6fvJpSVtIhS2XGqqH8L",
-        "province": "JAWA TIMUR",
-        "district": "KABUPATEN SIDOARJO",
-        "id_number": "351XXXXXXXXXXXXX",
-        "name": "MOCHAMMAD ARYA SALSABILA",
-        "place_date_of_birth": "SIDOARJO, 24-06-2001",
-        "gender": "LAKI-LAKI",
-        "blood_type": "-",
-        "address": "NGABAN",
-        "neighborhood": "005/002",
-        "village": "NGABAN",
-        "subdistrict": "TANGGULANGIN",
-        "religion": "ISLAM",
-        "marital_status": "BELUM KAWIN",
-        "occupation": "PELAJAR/MAHASISWA",
-        "nationality": "WNI",
-        "expiry_date": "SEUMUR HIDUP",
-        "attachment": "https://www.example.com/"
-    },
-    {
-        "uid": "q6fvJpSVtIhS2XGqqH8L",
-        "province": "JAWA TIMUR",
-        "district": "KABUPATEN SIDOARJO",
-        "id_number": "351XXXXXXXXXXXXX",
-        "name": "MOCHAMMAD ARYA SALSABILA",
-        "place_date_of_birth": "SIDOARJO, 24-06-2001",
-        "gender": "LAKI-LAKI",
-        "blood_type": "-",
-        "address": "NGABAN",
-        "neighborhood": "005/002",
-        "village": "NGABAN",
-        "subdistrict": "TANGGULANGIN",
-        "religion": "ISLAM",
-        "marital_status": "BELUM KAWIN",
-        "occupation": "PELAJAR/MAHASISWA",
-        "nationality": "WNI",
-        "expiry_date": "SEUMUR HIDUP",
-        "attachment": "https://www.example.com/"
-    }
-]
+{
+    "status": "OK",
+    "message": "The items/records was retrieved successfully.",
+    "data": [
+        {
+            "uid": "q6fvJpSVtIhS2XGqqH8L",
+            "province": "JAWA TIMUR",
+            "district": "KABUPATEN SIDOARJO",
+            "id_number": "351XXXXXXXXXXXXX",
+            "name": "MOCHAMMAD ARYA SALSABILA",
+            "place_date_of_birth": "SIDOARJO, 24-06-2001",
+            "gender": "LAKI-LAKI",
+            "blood_type": "-",
+            "address": "NGABAN",
+            "neighborhood": "005/002",
+            "village": "NGABAN",
+            "subdistrict": "TANGGULANGIN",
+            "religion": "ISLAM",
+            "marital_status": "BELUM KAWIN",
+            "occupation": "PELAJAR/MAHASISWA",
+            "nationality": "WNI",
+            "expiry_date": "SEUMUR HIDUP",
+            "attachment": "https://www.example.com/"
+        },
+        {
+            "uid": "q6fvJpSVtIhS2XGqqH8L",
+            "province": "JAWA TIMUR",
+            "district": "KABUPATEN SIDOARJO",
+            "id_number": "351XXXXXXXXXXXXX",
+            "name": "MOCHAMMAD ARYA SALSABILA",
+            "place_date_of_birth": "SIDOARJO, 24-06-2001",
+            "gender": "LAKI-LAKI",
+            "blood_type": "-",
+            "address": "NGABAN",
+            "neighborhood": "005/002",
+            "village": "NGABAN",
+            "subdistrict": "TANGGULANGIN",
+            "religion": "ISLAM",
+            "marital_status": "BELUM KAWIN",
+            "occupation": "PELAJAR/MAHASISWA",
+            "nationality": "WNI",
+            "expiry_date": "SEUMUR HIDUP",
+            "attachment": "https://www.example.com/"
+        }
+    ]
+}
 ```
 
 HTTP Response Status Codes  &nbsp;&nbsp; **400**
@@ -229,24 +233,28 @@ HTTP Response Status Codes  &nbsp;&nbsp; **200**
 
 ```json
 {
-    "uid": "q6fvJpSVtIhS2XGqqH8L",
-    "province": "JAWA TIMUR",
-    "district": "KABUPATEN SIDOARJO",
-    "id_number": "351XXXXXXXXXXXXX",
-    "name": "MOCHAMMAD ARYA SALSABILA",
-    "place_date_of_birth": "SIDOARJO, 24-06-2001",
-    "gender": "LAKI-LAKI",
-    "blood_type": "-",
-    "address": "NGABAN",
-    "neighborhood": "005/002",
-    "village": "NGABAN",
-    "subdistrict": "TANGGULANGIN",
-    "religion": "ISLAM",
-    "marital_status": "BELUM KAWIN",
-    "occupation": "PELAJAR/MAHASISWA",
-    "nationality": "WNI",
-    "expiry_date": "SEUMUR HIDUP",
-    "attachment": "https://www.example.com/"
+    "status": "OK",
+    "message": "The item/record was retrieved successfully.",
+    "data": {
+        "uid": "q6fvJpSVtIhS2XGqqH8L",
+        "province": "JAWA TIMUR",
+        "district": "KABUPATEN SIDOARJO",
+        "id_number": "351XXXXXXXXXXXXX",
+        "name": "MOCHAMMAD ARYA SALSABILA",
+        "place_date_of_birth": "SIDOARJO, 24-06-2001",
+        "gender": "LAKI-LAKI",
+        "blood_type": "-",
+        "address": "NGABAN",
+        "neighborhood": "005/002",
+        "village": "NGABAN",
+        "subdistrict": "TANGGULANGIN",
+        "religion": "ISLAM",
+        "marital_status": "BELUM KAWIN",
+        "occupation": "PELAJAR/MAHASISWA",
+        "nationality": "WNI",
+        "expiry_date": "SEUMUR HIDUP",
+        "attachment": "https://www.example.com/"
+    }
 }
 ```
 

@@ -2,8 +2,6 @@ const Firestore = require('@google-cloud/firestore');
 
 const db = new Firestore();
 
-const error_responses = require('error_responses');
-
 const createIdCard = async (req, res) => {
   try {
     const { uid } = req.body;
@@ -36,7 +34,10 @@ const createIdCard = async (req, res) => {
       message: 'The item/record was created successfully.',
     });
   } catch (error) {
-    res.status(400).json(error_responses(400));
+    res.status(400).json({
+      status: 'Bad Request',
+      message: error.message,
+    });
   }
 };
 
@@ -57,12 +58,22 @@ const getIdCards = async (req, res) => {
     }
 
     if (docs.length > 0) {
-      res.status(200).json(docs);
+      res.status(200).json({
+        status: 'OK',
+        message: 'The items/records was retrieved successfully.',
+        data: docs,
+      });
     } else {
-      res.status(404).json(error_responses(404));
+      res.status(404).json({
+        status: 'Not Found',
+        message: 'The item/record not found.',
+      });
     }
   } catch (error) {
-    res.status(400).json(error_responses(400));
+    res.status(400).json({
+      status: 'Bad Request',
+      message: error.message,
+    });
   }
 };
 
@@ -74,12 +85,22 @@ const getIdCard = async (req, res) => {
     const doc = await idCardRef.get();
 
     if (doc.exists) {
-      res.status(200).json(doc.data());
+      res.status(200).json({
+        status: 'OK',
+        message: 'The item/record was retrieved successfully.',
+        data: doc.data(),
+      });
     } else {
-      res.status(404).json(error_responses(404));
+      res.status(404).json({
+        status: 'Not Found',
+        message: 'The item/record not found.',
+      });
     }
   } catch (error) {
-    res.status(400).json(error_responses(400));
+    res.status(400).json({
+      status: 'Bad Request',
+      message: error.message,
+    });
   }
 };
 
@@ -115,7 +136,10 @@ const updateIdCard = async (req, res) => {
       message: 'The item/record was updated successfully.',
     });
   } catch (error) {
-    res.status(400).json(error_responses(400));
+    res.status(400).json({
+      status: 'Bad Request',
+      message: error.message,
+    });
   }
 };
 
@@ -130,7 +154,10 @@ const deleteIdCard = async (req, res) => {
       message: 'The item/record was deleted successfully.',
     });
   } catch (error) {
-    res.status(400).json(error_responses(400));
+    res.status(400).json({
+      status: 'Bad Request',
+      message: error.message,
+    });
   }
 };
 

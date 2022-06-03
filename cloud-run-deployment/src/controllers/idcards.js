@@ -2,7 +2,7 @@ const Firestore = require('@google-cloud/firestore');
 
 const db = new Firestore();
 
-const error_responses = require('../error_responses');
+const error_responses = require('error_responses');
 
 const createIdCard = async (req, res) => {
   try {

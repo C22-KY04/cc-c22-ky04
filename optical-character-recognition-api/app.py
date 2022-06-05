@@ -2,6 +2,7 @@ import os
 from datetime import datetime
 from google.cloud import storage
 from flask import Flask, jsonify, request
+from modules.ocr.function import extract_text_from_image
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "serviceAccountKey.json"
 
@@ -41,11 +42,19 @@ def optical_character_recognition():
         destination_blob_name = "{}.png".format(datetime.now().strftime("%d%m%Y-%H%M%S"))
         public_url = upload_to_bucket(bucket_name, source_file_name, destination_blob_name)
 
+        data = extract_text_from_image(url)
+
         return jsonify({
             "status": "OK",
-            "message": "File has been uploaded to Google Cloud Storage.",
-            "data": public_url
+            "message": "Successfully extract data with OCR.",
+            "data": data
         }), 200
+
+        # return jsonify({
+        #     "status": "OK",
+        #     "message": "File has been uploaded to Google Cloud Storage.",
+        #     "data": public_url
+        # }), 200
     
     else:
         return "Hello from Optical Character Recognition API, C22-KY04."

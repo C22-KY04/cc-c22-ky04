@@ -1,4 +1,7 @@
 import os
+os.system("pip install --upgrade pip")
+os.system("pip install opencv-python")
+os.system("pip install --upgrade google-cloud-storage")
 import cv2
 import numpy as np
 from datetime import datetime
@@ -53,4 +56,4 @@ def optical_character_recognition():
         return "Hello from Optical Character Recognition API, C22-KY04."
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8081)))

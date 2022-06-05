@@ -1,10 +1,6 @@
-## Cloud Architecture Diagram
+## Optical Character Recognition API
 
-![](./cloud-architecture-diagram/architecture.png)
-
-## Cloud Functions Deployment
-
-## Cloud Run Deployment
+## ID Card API
 
 Create a REST API using [Node.js](https://nodejs.org/en/), [Express](https://expressjs.com/), and [Firestore](https://cloud.google.com/firestore/docs).
 

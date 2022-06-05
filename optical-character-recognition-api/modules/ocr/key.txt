@@ -1,0 +1,17 @@
+provinsi
+nama
+nik
+tempattgl
+tempattgllahir
+lahir
+kelamin
+darah
+rtrw
+keldesa
+kecamatan
+agama
+perkawinan
+pekerjaan
+kewarganegaraan
+hingga
+kewargenegaraan

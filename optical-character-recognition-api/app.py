@@ -4,7 +4,7 @@ from google.cloud import storage
 from flask import Flask, jsonify, request
 from modules.ocr.function import extract_text_from_image
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "serviceAccountKey.json"
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "serviceAccountKey.json"
 
 app = Flask(__name__)
 app.config["JSON_SORT_KEYS"] = False

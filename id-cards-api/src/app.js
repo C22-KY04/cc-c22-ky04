@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
-  res.send('Hello from ID Card API, C22-KY04.');
+  res.send('Hello from ID Cards API, C22-KY04.');
 });
 
 app.use('/id_cards', isAuthenticated, idCards);

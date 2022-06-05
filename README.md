@@ -1,8 +1,10 @@
 ## Optical Character Recognition API
 
+Create REST API using [Python](https://www.python.org/), [Flask](https://flask.palletsprojects.com/en/2.1.x/), and [Cloud Storage](https://cloud.google.com/storage)
+
 ## ID Card API
 
-Create a REST API using [Node.js](https://nodejs.org/en/), [Express](https://expressjs.com/), and [Firestore](https://cloud.google.com/firestore/docs).
+Create a REST API using [Node.js](https://nodejs.org/en/), [Express](https://expressjs.com/), and [Firestore](https://cloud.google.com/firestore).
 
 ### Routing
 

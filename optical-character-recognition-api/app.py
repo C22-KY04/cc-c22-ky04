@@ -42,7 +42,7 @@ def optical_character_recognition():
         destination_blob_name = "{}.png".format(datetime.now().strftime("%d%m%Y-%H%M%S"))
         public_url = upload_to_bucket(bucket_name, source_file_name, destination_blob_name)
 
-        data = extract_text_from_image(url)
+        data = extract_text_from_image(public_url)
 
         return jsonify({
             "status": "OK",

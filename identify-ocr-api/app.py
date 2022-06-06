@@ -5,7 +5,7 @@ from flask import Flask, jsonify, request
 from modules.ocr.function import extract_text_from_image
 from modules.identify.function import doidentify
 
-# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "serviceAccountKey.json"
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "tesseract-container-53596ccdac20.json"
 
 app = Flask(__name__)
 app.config["JSON_SORT_KEYS"] = False
@@ -45,10 +45,10 @@ def optical_character_recognition():
 
         judge = doidentify(public_url)
         if judge == 'nonktp':
-                return jsonify({
-                "status": "Bad Request",
-                "message": "Bukan KTP."
-            }), 400
+            return jsonify({
+                "status": "Not Acceptable",
+                "message": "That's not an Indonesian ID Card (KTP). Please try again."
+            }), 406
 
         data = extract_text_from_image(public_url)
 

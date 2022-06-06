@@ -5,6 +5,7 @@ import cv2
 import tensorflow as tf
 import tensorflow.keras.preprocessing.image as tfimg
 import matplotlib.pyplot as plt
+from io import BytesIO
 
 # def download_model_file():
 
@@ -36,8 +37,11 @@ def url_to_image(url):
   image = cv2.imdecode(image, cv2.IMREAD_COLOR)
   return image
   
-def identify(image):
-  img = tfimg.load_img(image, target_size = (204, 324))
+def identify(URL):
+  # img = tfimg.load_img(image, target_size = (204, 324))
+  with urllib.request.urlopen(URL) as url:
+    img = tfimg.load_img(BytesIO(url.read()), target_size=(204, 324))
+
   imgplot = plt.imshow(img)
   x = tfimg.img_to_array(img)
   x = np.expand_dims(x, axis = 0)
@@ -51,5 +55,6 @@ def identify(image):
     return 'nonktp'
 
 def doidentify(url):
-  img = url_to_image(url)
-  return identify(img)
+  # img = url_to_image(url)
+  # return identify(img)
+  return identify(url)

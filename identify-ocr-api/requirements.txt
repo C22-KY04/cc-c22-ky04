@@ -4,6 +4,6 @@ opencv-python-headless==4.5.5.64
 pytesseract==0.3.9
 Pillow==9.1.1
 google-cloud-storage==2.3.0
-numpy
-matplotlib
-tensorflow
+numpy==1.22.4
+matplotlib==3.5.2
+tensorflow==2.9.1

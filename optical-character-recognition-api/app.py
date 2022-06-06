@@ -38,7 +38,7 @@ def optical_character_recognition():
                 "message": "No selected file."
             }), 400
 
-        bucket_name = "my-bucket-24052022"
+        bucket_name = "my-bucket-05062022"
         destination_blob_name = "{}.png".format(datetime.now().strftime("%d%m%Y-%H%M%S"))
         public_url = upload_to_bucket(bucket_name, source_file_name, destination_blob_name)
 

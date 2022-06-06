@@ -28,7 +28,7 @@ import matplotlib.pyplot as plt
 #   # Download the file to a destination
 #   blob.download_to_filename(folder + "model.h5")
 
-model = tf.keras.models.load_model('model.h5')
+model = tf.keras.models.load_model('./modules/identify/model.h5')
 
 def url_to_image(url):
   source_file = urllib.request.urlopen(url)

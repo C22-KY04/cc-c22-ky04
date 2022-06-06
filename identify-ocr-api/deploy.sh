@@ -10,6 +10,6 @@ gcloud beta run deploy identify-ocr-api \
   --platform managed \
   --region asia-southeast2 \
   --cpu=4 \
-  --memory=2Gi \
+  --memory=4Gi \
   --project=$GOOGLE_PROJECT_ID \
   --allow-unauthenticated

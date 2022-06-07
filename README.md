@@ -2,9 +2,96 @@
 
 Create REST API using [Python](https://www.python.org/), [Flask](https://flask.palletsprojects.com/en/2.1.x/), and [Cloud Storage](https://cloud.google.com/storage)
 
+### Base URL
+
+https://ocr-api-5igfi42iaq-et.a.run.app
+
+### Routing
+
+**POST**
+
+This method allows you to classify an image as ID card or not and extract data on ID card.
+
+Request Body &nbsp;&nbsp; `multipart/form-data`
+
+<table>
+  <tr>
+    <td>file</td>
+    <td>File</td>
+    <td>.png &nbsp;&nbsp/&nbsp;&nbsp .jpg &nbsp;&nbsp/&nbsp;&nbsp .jpeg</td>
+    <td><b>required</b></td>
+  </tr>
+</table>
+
+Response &nbsp;&nbsp; `application/json`
+
+HTTP Response Status Codes  &nbsp;&nbsp; **201**
+
+```json
+{
+    "status": "OK",
+    "message": "Successfully extract data with OCR.",
+    "data": {
+        "province": "DKI JAKARTA",
+        "district": "JAKARTA BARAT",
+        "id_number": "3173012512720017",
+        "name": "ANTONIUS NATANAEL IS",
+        "place_date_of_birth": "GISTING 25121972",
+        "gender": "LAKILAKI",
+        "blood_type": "O",
+        "address": "RAWA BUAYA",
+        "neighborhood": "008 010",
+        "village": "RAWA BUAYA",
+        "subdistrict": "CENGKARENG",
+        "religion": "KRISTEN",
+        "marital_status": "KAWIN",
+        "occupation": "KARYAWAN SWASTA",
+        "nationality": "WNI",
+        "expiry_date": "25122016",
+        "attachment": "https://storage.googleapis.com/my-bucket-05062022/07062022-090707.png"
+    }
+}
+```
+
+HTTP Response Status Codes  &nbsp;&nbsp; **400**
+
+```json
+{
+    "status": "Bad Request",
+    "message": "No file part."
+}
+```
+
+```json
+{
+    "status": "Bad Request",
+    "message": "No selected file."
+}
+```
+
+HTTP Response Status Codes  &nbsp;&nbsp; **406**
+
+```json
+{
+    "status": "Not Acceptable",
+    "message": "Only files with extension png, jpg, jpeg are allowed."
+}
+```
+
+```json
+{
+    "status": "Not Acceptable",
+    "message": "That's not an Indonesian ID Card (KTP). Please try again."
+}
+```
+
 ## ID Cards API
 
 Create a REST API using [Node.js](https://nodejs.org/en/), [Express](https://expressjs.com/), and [Firestore](https://cloud.google.com/firestore).
+
+### Base URL
+
+https://id-cards-api-yil5spdsaq-et.a.run.app
 
 ### Routing
 
@@ -48,7 +135,7 @@ Request Body &nbsp;&nbsp; `application/json`
     "occupation": "PELAJAR/MAHASISWA",
     "nationality": "WNI",
     "expiry_date": "SEUMUR HIDUP",
-    "attachment": "https://www.example.com/"
+    "attachment": "https://storage.googleapis.com/my-bucket-05062022/04062022-090807.png"
 }
 ```
 
@@ -140,7 +227,7 @@ HTTP Response Status Codes  &nbsp;&nbsp; **200**
             "occupation": "PELAJAR/MAHASISWA",
             "nationality": "WNI",
             "expiry_date": "SEUMUR HIDUP",
-            "attachment": "https://www.example.com/"
+            "attachment": "https://storage.googleapis.com/my-bucket-05062022/04062022-090807.png"
         },
         {
             "uid": "q6fvJpSVtIhS2XGqqH8L",
@@ -160,7 +247,7 @@ HTTP Response Status Codes  &nbsp;&nbsp; **200**
             "occupation": "PELAJAR/MAHASISWA",
             "nationality": "WNI",
             "expiry_date": "SEUMUR HIDUP",
-            "attachment": "https://www.example.com/"
+            "attachment": "https://storage.googleapis.com/my-bucket-05062022/04062022-090807.png"
         }
     ]
 }
@@ -251,7 +338,7 @@ HTTP Response Status Codes  &nbsp;&nbsp; **200**
         "occupation": "PELAJAR/MAHASISWA",
         "nationality": "WNI",
         "expiry_date": "SEUMUR HIDUP",
-        "attachment": "https://www.example.com/"
+        "attachment": "https://storage.googleapis.com/my-bucket-05062022/04062022-090807.png"
     }
 }
 ```
@@ -336,7 +423,7 @@ Request Body &nbsp;&nbsp; `application/json`
     "occupation": "PELAJAR/MAHASISWA",
     "nationality": "WNI",
     "expiry_date": "SEUMUR HIDUP",
-    "attachment": "https://www.example.com/"
+    "attachment": "https://storage.googleapis.com/my-bucket-05062022/04062022-090807.png"
 }
 ```
 

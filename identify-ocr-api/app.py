@@ -65,7 +65,8 @@ def optical_character_recognition():
         # }), 200
     
     else:
-        return "Hello from Optical Character Recognition API, C22-KY04."
+        # return "Hello from Optical Character Recognition API, C22-KY04."
+        return os.system("ls -la /app/*")
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))

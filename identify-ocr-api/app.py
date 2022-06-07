@@ -3,7 +3,7 @@ from datetime import datetime
 from google.cloud import storage
 from flask import Flask, jsonify, request
 from modules.ocr.function import extract_text_from_image
-# from modules.identify.function import doidentify
+from modules.identify.function import doidentify
 
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "tesseract-container-53596ccdac20.json"
 
@@ -24,7 +24,7 @@ def upload_to_bucket(bucket_name, source_file_name, destination_blob_name):
 
 @app.route("/", methods=["GET", "POST"])
 def optical_character_recognition():
-    return os.system("ls -la /app/modules/*")
+    # return os.system("ls -la /app/modules/*")
     if request.method == "POST":
         if "file" not in request.files:
             return jsonify({

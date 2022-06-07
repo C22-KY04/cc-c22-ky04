@@ -4,8 +4,9 @@
 FROM python:latest
 
 # Copy local code to the container image.
-WORKDIR /app
-COPY . .
+ENV APP_HOME /app
+WORKDIR $APP_HOME
+COPY . ./
 
 # Install production dependencies.
 RUN pip install --upgrade pip

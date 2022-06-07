@@ -1,25 +1,17 @@
 import os
 from datetime import datetime
-from google.cloud import storage
 from flask import Flask, jsonify, request
+from modules.storage.function import upload_to_bucket, download_from_bucket
 from modules.ocr.function import extract_text_from_image
+from modules.classification.function import image_classification 
 
-# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "serviceAccountKey.json"
+ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
 
 app = Flask(__name__)
 app.config["JSON_SORT_KEYS"] = False
 
-def upload_to_bucket(bucket_name, source_file_name, destination_blob_name):
-    storage_client = storage.Client()
-    bucket = storage_client.bucket(bucket_name)
-
-    blob = bucket.blob(destination_blob_name)
-    blob.upload_from_string(
-        source_file_name.read(),
-        content_type=source_file_name.content_type
-    )
-
-    return blob.public_url
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route("/", methods=["GET", "POST"])
 def optical_character_recognition():
@@ -38,9 +30,28 @@ def optical_character_recognition():
                 "message": "No selected file."
             }), 400
 
+        if not (source_file_name and allowed_file(source_file_name.filename)):
+            return jsonify({
+                "status": "Not Acceptable",
+                "message": "Only files with extension png, jpg, jpeg are allowed."
+            }), 406
+
         bucket_name = "my-bucket-05062022"
-        destination_blob_name = "{}.png".format(datetime.now().strftime("%d%m%Y-%H%M%S"))
+        blob_name = datetime.now().strftime("%d%m%Y-%H%M%S")
+        destination_blob_name = "{}.png".format(blob_name)
         public_url = upload_to_bucket(bucket_name, source_file_name, destination_blob_name)
+
+        source_blob_name = "{}.png".format(blob_name)
+        destination_file_name = "tmp/image.png"
+        download_from_bucket(bucket_name, source_blob_name, destination_file_name)
+
+        is_id_card = image_classification()
+
+        if not is_id_card:
+            return jsonify({
+                "status": "Not Acceptable",
+                "message": "That's not an Indonesian ID Card (KTP). Please try again."
+            }), 406
 
         data = extract_text_from_image(public_url)
 
@@ -50,12 +61,6 @@ def optical_character_recognition():
             "data": data
         }), 200
 
-        # return jsonify({
-        #     "status": "OK",
-        #     "message": "File has been uploaded to Google Cloud Storage.",
-        #     "data": public_url
-        # }), 200
-    
     else:
         return "Hello from Optical Character Recognition API, C22-KY04."
 

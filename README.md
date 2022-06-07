@@ -1,6 +1,6 @@
 ## Optical Character Recognition API
 
-Create REST API using [Python](https://www.python.org/), [Flask](https://flask.palletsprojects.com/en/2.1.x/), and [Cloud Storage](https://cloud.google.com/storage)
+Create REST API using [Python](https://www.python.org/), [Flask](https://flask.palletsprojects.com/en/2.1.x/), [Cloud Run](https://cloud.google.com/run), and [Cloud Storage](https://cloud.google.com/storage)
 
 ### Base URL
 
@@ -87,7 +87,7 @@ HTTP Response Status Codes  &nbsp;&nbsp; **406**
 
 ## ID Cards API
 
-Create a REST API using [Node.js](https://nodejs.org/en/), [Express](https://expressjs.com/), and [Firestore](https://cloud.google.com/firestore).
+Create a REST API using [Node.js](https://nodejs.org/en/), [Express](https://expressjs.com/), [Cloud Run](https://cloud.google.com/run), and [Firestore](https://cloud.google.com/firestore).
 
 ### Base URL
 

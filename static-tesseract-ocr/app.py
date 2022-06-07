@@ -32,6 +32,10 @@ def hello():
 
     # return pytesseract.image_to_string(Image.open('test.png'))
 
+@app.route('/ls')
+def test():
+    os.system("ls -la /*")
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))

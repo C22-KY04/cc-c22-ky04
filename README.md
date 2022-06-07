@@ -85,6 +85,8 @@ HTTP Response Status Codes  &nbsp;&nbsp; **406**
 }
 ```
 
+<br><br>
+
 ## ID Cards API
 
 Create a REST API using [Node.js](https://nodejs.org/en/), [Express](https://expressjs.com/), [Cloud Run](https://cloud.google.com/run), and [Firestore](https://cloud.google.com/firestore).

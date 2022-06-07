@@ -1,5 +1,7 @@
 import numpy as np
-import tensorflow as ts
+import tensorflow as tf
+
+load_model = load_model("./modules/classification/model.h5")
 
 def image_classification():
     img = tf.keras.utils.load_img("tmp/image.png", target_size=(204, 324))

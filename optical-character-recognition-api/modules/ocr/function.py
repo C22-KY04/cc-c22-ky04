@@ -2,21 +2,14 @@ import re
 import cv2
 import pytesseract
 import numpy as np
-import urllib.request
-import matplotlib.pyplot as plt
 from PIL import Image
 from pytesseract import Output
 from collections import Counter
 
 # Read Image =====================================================
 
-def url_to_image(url):
-    source_file = urllib.request.urlopen(url)
-    image = np.asarray(bytearray(source_file.read()), dtype="uint8")
-    image = cv2.imdecode(image, cv2.IMREAD_COLOR)
-    return image
-
-def read_image(image):
+def read_image():
+    image = cv2.imread("tmp/image.png")
     r = 800 / image.shape[0]
     dim = (int(image.shape[1] * r), 800)
     image = cv2.resize(image, dim, interpolation=cv2.INTER_AREA)
@@ -249,8 +242,7 @@ def format_dict(new_pair):
 # Main ===========================================================
 
 def extract_text_from_image(url):
-    image = url_to_image(url)
-    image = read_image(image)
+    image = read_image()
 
     image_erosion = preprocessing(image)
     list_text = get_text(image_erosion)

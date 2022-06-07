@@ -8,7 +8,7 @@ https://ocr-api-5igfi42iaq-et.a.run.app
 
 ### Routing
 
-**POST**
+**POST** &nbsp;&nbsp; `/`
 
 This method allows you to classify an image as ID card or not and extract data on ID card.
 

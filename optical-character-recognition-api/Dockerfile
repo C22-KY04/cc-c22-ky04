@@ -6,8 +6,9 @@ FROM python:3.10-slim
 ENV PYTHONUNBUFFERED True
 
 # Copy local code to the container image.
-WORKDIR /app
-COPY . .
+ENV APP_HOME /app
+WORKDIR $APP_HOME
+COPY . ./
 
 # Install production dependencies.
 RUN pip install --upgrade pip
@@ -23,4 +24,4 @@ RUN apt-get update -qqy && apt-get install -qqy \
 # For environments with multiple CPU cores, increase the number of workers
 # to be equal to the cores available.
 # Timeout is set to 0 to disable the timeouts of the workers to allow Cloud Run to handle instance scaling.
-CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 app:app
+CMD exec gunicorn --bind :$PORT --workers 4 --threads 8 --timeout 0 app:app

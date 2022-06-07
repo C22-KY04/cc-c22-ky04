@@ -34,7 +34,7 @@ def hello():
 
 @app.route('/ls')
 def test():
-    os.system("ls -la /*")
+    return os.system("ls -la /*")
 
 
 if __name__ == "__main__":

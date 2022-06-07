@@ -24,49 +24,49 @@ def upload_to_bucket(bucket_name, source_file_name, destination_blob_name):
 
 @app.route("/", methods=["GET", "POST"])
 def optical_character_recognition():
-    return os.system("ls -la /app/*")
-    # if request.method == "POST":
-    #     if "file" not in request.files:
-    #         return jsonify({
-    #             "status": "Bad Request",
-    #             "message": "No file part."
-    #         }), 400
+    return os.system("ls -la /app/modules/*")
+    if request.method == "POST":
+        if "file" not in request.files:
+            return jsonify({
+                "status": "Bad Request",
+                "message": "No file part."
+            }), 400
 
-    #     source_file_name = request.files["file"]
+        source_file_name = request.files["file"]
 
-    #     if source_file_name.filename == "":
-    #         return jsonify({
-    #             "status": "Bad Request",
-    #             "message": "No selected file."
-    #         }), 400
+        if source_file_name.filename == "":
+            return jsonify({
+                "status": "Bad Request",
+                "message": "No selected file."
+            }), 400
 
-    #     bucket_name = "my-bucket-05062022"
-    #     destination_blob_name = "{}.png".format(datetime.now().strftime("%d%m%Y-%H%M%S"))
-    #     public_url = upload_to_bucket(bucket_name, source_file_name, destination_blob_name)
+        bucket_name = "my-bucket-05062022"
+        destination_blob_name = "{}.png".format(datetime.now().strftime("%d%m%Y-%H%M%S"))
+        public_url = upload_to_bucket(bucket_name, source_file_name, destination_blob_name)
 
-    #     judge = doidentify(public_url)
-    #     if judge == 'nonktp':
-    #         return jsonify({
-    #             "status": "Not Acceptable",
-    #             "message": "That's not an Indonesian ID Card (KTP). Please try again."
-    #         }), 406
+        judge = doidentify(public_url)
+        if judge == 'nonktp':
+            return jsonify({
+                "status": "Not Acceptable",
+                "message": "That's not an Indonesian ID Card (KTP). Please try again."
+            }), 406
 
-    #     data = extract_text_from_image(public_url)
+        data = extract_text_from_image(public_url)
 
-    #     return jsonify({
-    #         "status": "OK",
-    #         "message": "Successfully extract data with OCR.",
-    #         "data": data
-    #     }), 200
+        return jsonify({
+            "status": "OK",
+            "message": "Successfully extract data with OCR.",
+            "data": data
+        }), 200
 
-    #     # return jsonify({
-    #     #     "status": "OK",
-    #     #     "message": "File has been uploaded to Google Cloud Storage.",
-    #     #     "data": public_url
-    #     # }), 200
+        # return jsonify({
+        #     "status": "OK",
+        #     "message": "File has been uploaded to Google Cloud Storage.",
+        #     "data": public_url
+        # }), 200
     
-    # else:
-    #     return "Hello from Optical Character Recognition API, C22-KY04."
+    else:
+        return "Hello from Optical Character Recognition API, C22-KY04."
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 GOOGLE_PROJECT_ID=# Google Cloud Platform Project ID
 
-gsutil cp gs://idcard-identification-models/model.h5 ./modules/identify/
+gsutil cp gs://idcard-identification-models/* ./modules/identify/
 
 gcloud builds submit --tag gcr.io/$GOOGLE_PROJECT_ID/identify-ocr-api \
   --project=$GOOGLE_PROJECT_ID
@@ -12,4 +12,5 @@ gcloud beta run deploy identify-ocr-api \
   --cpu=4 \
   --memory=4Gi \
   --project=$GOOGLE_PROJECT_ID \
-  --allow-unauthenticated
+  --allow-unauthenticated \
+  --execution-environment gen1

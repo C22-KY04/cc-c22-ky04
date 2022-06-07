@@ -18,7 +18,7 @@ Request Body &nbsp;&nbsp; `multipart/form-data`
   <tr>
     <td>file</td>
     <td>File</td>
-    <td>png, jpg, jpeg</td>
+    <td>png&nbsp;/&nbsp;jpg&nbsp;/&nbsp;jpeg</td>
     <td><b>required</b></td>
   </tr>
 </table>

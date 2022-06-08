@@ -1,5 +1,7 @@
 GOOGLE_PROJECT_ID=# Google Cloud Platform Project ID
 
+gsutils cp gs://idcard-identification-models/model.h5 ./modules/classification/model.h5
+
 gcloud builds submit --tag gcr.io/$GOOGLE_PROJECT_ID/ocr-api \
   --project=$GOOGLE_PROJECT_ID
 

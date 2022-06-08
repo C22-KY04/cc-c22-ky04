@@ -1,6 +1,6 @@
 ## Cloud Architecture Diagram
 
-![](cloud-architecture-diagram.svg)
+![](cloud-architecture-diagram.png)
 
 ## Optical Character Recognition API
 

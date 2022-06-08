@@ -2,6 +2,8 @@
 
 ![](cloud-architecture-diagram.png)
 
+See more [here](https://www.figma.com/file/bXdu32FvMX29idjgUkxKXN/Google-Cloud-Diagram?node-id=0%3A1)
+
 ## Optical Character Recognition API
 
 Create REST API using [Python](https://www.python.org/), [Flask](https://flask.palletsprojects.com/en/2.1.x/), [Cloud Run](https://cloud.google.com/run), and [Cloud Storage](https://cloud.google.com/storage)

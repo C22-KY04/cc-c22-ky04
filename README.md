@@ -1,6 +1,6 @@
 ## Cloud Architecture Diagram
 
-![](cloud-architecture-diagram.png)
+
 
 See more [here](https://www.figma.com/file/bXdu32FvMX29idjgUkxKXN/Google-Cloud-Diagram?node-id=0%3A1)
 

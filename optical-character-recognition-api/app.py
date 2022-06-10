@@ -53,13 +53,18 @@ def optical_character_recognition():
                 "message": "That's not an Indonesian ID Card (KTP). Please try again."
             }), 406
 
-        data = extract_text_from_image(public_url)
-
-        return jsonify({
-            "status": "OK",
-            "message": "Successfully extract data with OCR.",
-            "data": data
-        }), 200
+        try:
+            data = extract_text_from_image(public_url)
+            return jsonify({
+                "status": "OK",
+                "message": "Successfully extract data with OCR.",
+                "data": data
+            }), 200
+        except Exception as e:
+            return jsonify({
+                "status": "Internal Server Error",
+                "message": e
+            }), 500
 
     else:
         return "Hello from Optical Character Recognition API, C22-KY04."

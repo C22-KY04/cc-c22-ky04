@@ -40,23 +40,24 @@ HTTP Response Status Codes  &nbsp;&nbsp; **201**
     "status": "OK",
     "message": "Successfully extract data with OCR.",
     "data": {
-        "province": "DKI JAKARTA",
-        "district": "JAKARTA BARAT",
-        "id_number": "3173012512720017",
-        "name": "ANTONIUS NATANAEL IS",
-        "place_date_of_birth": "GISTING 25121972",
-        "gender": "LAKILAKI",
-        "blood_type": "O",
-        "address": "RAWA BUAYA",
-        "neighborhood": "008 010",
-        "village": "RAWA BUAYA",
-        "subdistrict": "CENGKARENG",
-        "religion": "KRISTEN",
-        "marital_status": "KAWIN",
-        "occupation": "KARYAWAN SWASTA",
+        "uid": "q6fvJpSVtIhS2XGqqH8L",
+        "province": "JAWA TIMUR",
+        "district": "KABUPATEN SIDOARJO",
+        "id_number": "351XXXXXXXXXXXXX",
+        "name": "MOCHAMMAD ARYA SALSABILA",
+        "place_date_of_birth": "SIDOARJO, 24-06-2001",
+        "gender": "LAKI-LAKI",
+        "blood_type": "-",
+        "address": "NGABAN",
+        "neighborhood": "005/002",
+        "village": "NGABAN",
+        "subdistrict": "TANGGULANGIN",
+        "religion": "ISLAM",
+        "marital_status": "BELUM KAWIN",
+        "occupation": "PELAJAR/MAHASISWA",
         "nationality": "WNI",
-        "expiry_date": "25122016",
-        "attachment": "https://storage.googleapis.com/my-bucket-05062022/07062022-090707.png"
+        "expiry_date": "SEUMUR HIDUP",
+        "attachment": "https://storage.googleapis.com/my-bucket-05062022/04062022-090807.png"
     }
 }
 ```
@@ -90,6 +91,15 @@ HTTP Response Status Codes  &nbsp;&nbsp; **406**
 {
     "status": "Not Acceptable",
     "message": "That's not an Indonesian ID Card (KTP). Please try again."
+}
+```
+
+HTTP Response Status Codes  &nbsp;&nbsp; **500**
+
+```json
+{
+    "status": "Internal Server Error",
+    "message": "Error message..."
 }
 ```
 

@@ -19,9 +19,9 @@ RUN apt-get update -qqy && apt-get install -qqy \
         tesseract-ocr \
         libtesseract-dev
 
-#Download and copy models to models/classification
+#Download and move model to models/classification
 RUN gdown 1DfyWj80VGLec0btQ2rS2uGetCYB2l0nE
-RUN cp ./model.h5 ./modules/classification/model.h5
+RUN mv ./model.h5 ./modules/classification/model.h5
 
 # Run the web service on container startup. Here we use the gunicorn
 # webserver, with one worker process and 8 threads.

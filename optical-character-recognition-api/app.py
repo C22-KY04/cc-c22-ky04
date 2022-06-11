@@ -61,9 +61,10 @@ def optical_character_recognition():
                 "data": data
             }), 200
         except Exception as e:
+            msg = str(e)
             return jsonify({
                 "status": "Internal Server Error",
-                "message": e
+                "message": msg
             }), 500
 
     else:

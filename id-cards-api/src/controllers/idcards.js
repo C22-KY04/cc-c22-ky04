@@ -104,63 +104,6 @@ const getIdCard = async (req, res) => {
   }
 };
 
-const updateIdCard = async (req, res) => {
-  try {
-    const { uid } = req.params;
-
-    const data = {
-      uid: req.body.uid,
-      province: req.body.province,
-      district: req.body.district,
-      id_number: req.body.id_number,
-      name: req.body.name,
-      place_date_of_birth: req.body.place_date_of_birth,
-      gender: req.body.gender,
-      blood_type: req.body.blood_type,
-      address: req.body.address,
-      neighborhood: req.body.neighborhood,
-      village: req.body.village,
-      subdistrict: req.body.subdistrict,
-      religion: req.body.religion,
-      marital_status: req.body.marital_status,
-      occupation: req.body.occupation,
-      nationality: req.body.nationality,
-      expiry_date: req.body.expiry_date,
-      attachment: req.body.attachment,
-    };
-
-    await db.collection('id_cards').doc(uid).update(data);
-
-    res.status(200).json({
-      status: 'OK',
-      message: 'The item/record was updated successfully.',
-    });
-  } catch (error) {
-    res.status(400).json({
-      status: 'Bad Request',
-      message: error.message,
-    });
-  }
-};
-
-const deleteIdCard = async (req, res) => {
-  try {
-    const { uid } = req.params;
-
-    await db.collection('id_cards').doc(uid).delete();
-
-    res.status(200).json({
-      status: 'OK',
-      message: 'The item/record was deleted successfully.',
-    });
-  } catch (error) {
-    res.status(400).json({
-      status: 'Bad Request',
-      message: error.message,
-    });
-  }
-};
-
 module.exports = {
-  createIdCard, getIdCards, getIdCard, updateIdCard, deleteIdCard,
+  createIdCard, getIdCards, getIdCard,
 };

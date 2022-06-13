@@ -4,6 +4,37 @@
 
 See more [here](https://www.figma.com/file/bXdu32FvMX29idjgUkxKXN/Google-Cloud-Diagram?node-id=0%3A1)
 
+### Billing Cost
+Estimated billing cost that's used in this projects:
+<table>
+  <tr>
+    <td>Services</td>
+    <td>Price</td>
+  </tr>
+  <tr>
+    <td>Cloud Run</td>
+    <td>IDR 0</td>
+  </tr>
+  <tr>
+    <td>Cloud Storage</td>
+    <td>IDR 33,502.95</td>
+  </tr>
+  <tr>
+    <td>Cloud Build</td>
+    <td>IDR 0</td>
+  </tr>
+  <tr>
+    <td>Firestore</td>
+    <td>IDR 11,187.07</td>
+  </tr>
+  <tr>
+    <td>Total</td>
+    <td>IDR 44,690.02</td>
+  </tr>
+</table>
+
+See more detail [here](https://cloud.google.com/products/calculator/#id=05305aa6-1fa2-442f-9ebc-2b7ed1af4125)
+
 <br><br>
 
 ## Optical Character Recognition API

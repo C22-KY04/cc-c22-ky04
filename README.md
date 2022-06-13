@@ -15,8 +15,8 @@ Create REST API using [Python](https://www.python.org/), [Flask](https://flask.p
 ![](optical-character-recognition-api.png)
 
 Description:
-1. Upload to Google Cloud Storage Bucket.
-2. Download from Google Cloud Storage Bucket.
+1. Upload to Google Cloud Storage Bucket using HTTP Request Method `POST`.
+2. Download images from Google Cloud Storage Bucket.
 3. Classify images using TensorFlow, whether the image is ID card or not.
 4. If the image is not an ID card (KTP), then immediately return the results to the Android Application.
 5. If the image is an ID card (KTP), then proceed to collect the details.
@@ -127,8 +127,12 @@ Create a REST API using [Node.js](https://nodejs.org/en/), [Express](https://exp
 ![](id-cards-api.png)
 
 Description:
-1. Android application performs HTTP Request Method to HTTP REST API. It allows users to save ID Card (KTP) details, retrieve ID Card details, retrieve entire ID Cards, or retrieve some ID Cards by name.
-2. If the HTTP Request Method sent is POST, the ID Card (KTP) details will be saved to Cloud Firestore.
+1. Firebase Authentication will send JWT token to Android Application.
+2. Then the Android Application performs the HTTP Request Method by sending the JWT token to the HTTP REST API. So only authenticated users can make requests. Requests that users can make are:
+    - `POST` to save ID Card (KTP) details.
+    - `GET` to retrieve entire ID Cards, or retrieve some ID Cards by name.
+    - `GET` to retrieve ID Card details.
+3. If the HTTP Request Method sent is `POST`, the ID Card (KTP) details will be saved to Cloud Firestore.
 
 ### Base URL
 

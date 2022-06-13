@@ -127,8 +127,8 @@ Create a REST API using [Node.js](https://nodejs.org/en/), [Express](https://exp
 ![](id-cards-api.png)
 
 Description:
-1. Android application performs HTTP Request Method to HTTP REST API. It allows users to save ID Card details, retrieve ID Card details, retrieve entire ID Cards, or retrieve some ID Cards by name.
-2. If the HTTP Reuqest Method sent is POST, the ktp details will be saved to Cloud Firestore.
+1. Android application performs HTTP Request Method to HTTP REST API. It allows users to save ID Card (KTP) details, retrieve ID Card details, retrieve entire ID Cards, or retrieve some ID Cards by name.
+2. If the HTTP Request Method sent is POST, the ID Card (KTP) details will be saved to Cloud Firestore.
 
 ### Base URL
 

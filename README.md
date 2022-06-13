@@ -10,6 +10,19 @@ See more [here](https://www.figma.com/file/bXdu32FvMX29idjgUkxKXN/Google-Cloud-D
 
 Create REST API using [Python](https://www.python.org/), [Flask](https://flask.palletsprojects.com/en/2.1.x/), [TensorFlow](https://www.tensorflow.org), [Cloud Run](https://cloud.google.com/run), and [Cloud Storage](https://cloud.google.com/storage)
 
+### Workflow
+
+![](optical-character-recognition-api.png)
+
+Description:
+1. Upload to Google Cloud Storage Bucket.
+2. Download from Google Cloud Storage Bucket.
+3. Classify images using TensorFlow, whether the image is ID card or not.
+4. If the image is not an ID card (KTP), then immediately return the results to the Android Application.
+5. If the image is an ID card (KTP), then proceed to collect the details.
+6. Collect ID Card (KTP) details using PyTesseract (Python Tesseract).
+7. Then send the results to the Android Application for re-validation.
+
 ### Base URL
 
 https://ocr-api-5igfi42iaq-et.a.run.app
@@ -109,6 +122,14 @@ HTTP Response Status Codes  &nbsp;&nbsp; **500**
 
 Create a REST API using [Node.js](https://nodejs.org/en/), [Express](https://expressjs.com/), [Firebase Auth](https://firebase.google.com/docs/auth), [Cloud Run](https://cloud.google.com/run), and [Cloud Firestore](https://cloud.google.com/firestore).
 
+### Workflow
+
+![](id-cards-api.png)
+
+Description:
+1. Android application performs HTTP Request Method to HTTP REST API. It allows users to save ID Card details, retrieve ID Card details, retrieve entire ID Cards, or retrieve some ID Cards by name.
+2. If the HTTP Reuqest Method sent is POST, the ktp details will be saved to Cloud Firestore.
+
 ### Base URL
 
 https://id-cards-api-yil5spdsaq-et.a.run.app
@@ -117,7 +138,7 @@ https://id-cards-api-yil5spdsaq-et.a.run.app
 
 **POST** &nbsp;&nbsp; `/id_cards`
 
-This method allows you to create ID Card.
+This method allows you to save ID Card details.
 
 Authentication
 

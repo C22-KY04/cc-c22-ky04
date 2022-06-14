@@ -1,6 +1,6 @@
 const express = require('express');
 const {
-  createIdCard, getIdCards, getIdCard,
+  createIdCard, getIdCards,
 } = require('../controllers/idcards');
 
 const router = express.Router();
@@ -8,7 +8,5 @@ const router = express.Router();
 router.post('/', createIdCard);
 
 router.get('/', getIdCards);
-
-router.get('/:uid', getIdCard);
 
 module.exports = router;

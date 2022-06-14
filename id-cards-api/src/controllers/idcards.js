@@ -4,10 +4,9 @@ const db = new Firestore();
 
 const createIdCard = async (req, res) => {
   try {
-    const { uid } = req.body;
+    const { currentUser } = req;
 
     const data = {
-      uid: req.body.uid,
       province: req.body.province,
       district: req.body.district,
       id_number: req.body.id_number,
@@ -27,7 +26,7 @@ const createIdCard = async (req, res) => {
       attachment: req.body.attachment,
     };
 
-    await db.collection('id_cards').doc(uid).set(data);
+    await db.collection('id_cards').doc(currentUser.uid).set(data);
 
     res.status(201).json({
       status: 'Created',
@@ -77,33 +76,6 @@ const getIdCards = async (req, res) => {
   }
 };
 
-const getIdCard = async (req, res) => {
-  try {
-    const { uid } = req.params;
-
-    const idCardRef = db.collection('id_cards').doc(uid);
-    const doc = await idCardRef.get();
-
-    if (doc.exists) {
-      res.status(200).json({
-        status: 'OK',
-        message: 'The item/record was retrieved successfully.',
-        data: doc.data(),
-      });
-    } else {
-      res.status(404).json({
-        status: 'Not Found',
-        message: 'The item/record not found.',
-      });
-    }
-  } catch (error) {
-    res.status(400).json({
-      status: 'Bad Request',
-      message: error.message,
-    });
-  }
-};
-
 module.exports = {
-  createIdCard, getIdCards, getIdCard,
+  createIdCard, getIdCards,
 };

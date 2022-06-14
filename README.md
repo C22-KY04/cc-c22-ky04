@@ -2,9 +2,11 @@
 
 ![](cloud-architecture-diagram.png)
 
-See more [here](https://www.figma.com/file/bXdu32FvMX29idjgUkxKXN/Google-Cloud-Diagram?node-id=0%3A1)
+See more detail [here](https://www.figma.com/file/bXdu32FvMX29idjgUkxKXN/Google-Cloud-Diagram?node-id=0%3A1)
 
-### Billing Cost
+<br><br>
+
+## Billing Cost
 Estimated billing cost that's used in this projects:
 <table>
   <tr>
@@ -37,6 +39,16 @@ See more detail [here](https://cloud.google.com/products/calculator/#id=05305aa6
 
 <br><br>
 
+## Securing a REST API with JWT
+
+![](securing-a-rest-api-with-jwt.png)
+
+Description:
+1. Firebase Authentication will send JWT token to Android Application.
+2. Android Application will send the JWT token to the Cloud Run Service. Then Cloud Run Service will validate the token, so only authenticated users can make requests.
+
+<br><br>
+
 ## Optical Character Recognition API
 
 Create REST API using [Python](https://www.python.org/), [Flask](https://flask.palletsprojects.com/en/2.1.x/), [TensorFlow](https://www.tensorflow.org), [Cloud Run](https://cloud.google.com/run), and [Cloud Storage](https://cloud.google.com/storage)
@@ -58,11 +70,32 @@ Description:
 
 https://ocr-api-5igfi42iaq-et.a.run.app
 
+Response `string`
+
+```json
+"Hello from Optical Character Recognition API, C22-KY04."
+```
+
 ### Routing
 
-**POST** &nbsp;&nbsp; `/`
+**POST** &nbsp;&nbsp; `/ocr`
 
 This method allows you to classify an image as ID card or not and extract data on ID card.
+
+Authentication
+
+- [x] ID Tokens
+
+Headers
+
+<table>
+  <tr>
+    <td>Authorization</td>
+    <td>string</td>
+    <td>Bearer &lt;ID Tokens&gt;</td>
+    <td><b>required</b></td>
+  </tr>
+</table>
 
 Request Body &nbsp;&nbsp; `multipart/form-data`
 
@@ -84,7 +117,6 @@ HTTP Response Status Codes  &nbsp;&nbsp; **201**
     "status": "OK",
     "message": "Successfully extract data with OCR.",
     "data": {
-        "uid": "q6fvJpSVtIhS2XGqqH8L",
         "province": "JAWA TIMUR",
         "district": "KABUPATEN SIDOARJO",
         "id_number": "351XXXXXXXXXXXXX",
@@ -101,12 +133,19 @@ HTTP Response Status Codes  &nbsp;&nbsp; **201**
         "occupation": "PELAJAR/MAHASISWA",
         "nationality": "WNI",
         "expiry_date": "SEUMUR HIDUP",
-        "attachment": "https://storage.googleapis.com/my-bucket-05062022/04062022-090807.png"
+        "attachment": "https://storage.googleapis.com/id-cards-photo/04062022-090807.png"
     }
 }
 ```
 
 HTTP Response Status Codes  &nbsp;&nbsp; **400**
+
+```json
+{
+    "status": "Bad Request",
+    "message": "No token provided."
+}
+```
 
 ```json
 {
@@ -158,16 +197,20 @@ Create a REST API using [Node.js](https://nodejs.org/en/), [Express](https://exp
 ![](id-cards-api.png)
 
 Description:
-1. Firebase Authentication will send JWT token to Android Application.
-2. Then the Android Application performs the HTTP Request Method by sending the JWT token to the HTTP REST API. So only authenticated users can make requests. Requests that users can make are:
+1. Android Application performs the HTTP Request Method to the HTTP REST API. Some of the methods that can be used are:
     - `POST` to save ID Card (KTP) details.
     - `GET` to retrieve entire ID Cards, or retrieve some ID Cards by name.
-    - `GET` to retrieve ID Card details.
-3. If the HTTP Request Method sent is `POST`, the ID Card (KTP) details will be saved to Cloud Firestore.
+2. If the HTTP Request Method sent is `POST`, the ID Card (KTP) details will be saved to Cloud Firestore.
 
 ### Base URL
 
 https://id-cards-api-yil5spdsaq-et.a.run.app
+
+Response `string`
+
+```json
+"Hello from ID Cards API, C22-KY04."
+```
 
 ### Routing
 
@@ -194,7 +237,6 @@ Request Body &nbsp;&nbsp; `application/json`
 
 ```json
 {
-    "uid": "q6fvJpSVtIhS2XGqqH8L",
     "province": "JAWA TIMUR",
     "district": "KABUPATEN SIDOARJO",
     "id_number": "351XXXXXXXXXXXXX",
@@ -211,7 +253,7 @@ Request Body &nbsp;&nbsp; `application/json`
     "occupation": "PELAJAR/MAHASISWA",
     "nationality": "WNI",
     "expiry_date": "SEUMUR HIDUP",
-    "attachment": "https://storage.googleapis.com/my-bucket-05062022/04062022-090807.png"
+    "attachment": "https://storage.googleapis.com/id-cards-photo/u10rFTlsFwSaeAJ3d6DhcaCZqWX2.png"
 }
 ```
 
@@ -227,6 +269,13 @@ HTTP Response Status Codes  &nbsp;&nbsp; **201**
 ```
 
 HTTP Response Status Codes  &nbsp;&nbsp; **400**
+
+```json
+{
+    "status": "Bad Request",
+    "message": "No token provided."
+}
+```
 
 ```json
 {
@@ -286,7 +335,6 @@ HTTP Response Status Codes  &nbsp;&nbsp; **200**
     "message": "The items/records was retrieved successfully.",
     "data": [
         {
-            "uid": "q6fvJpSVtIhS2XGqqH8L",
             "province": "JAWA TIMUR",
             "district": "KABUPATEN SIDOARJO",
             "id_number": "351XXXXXXXXXXXXX",
@@ -303,10 +351,9 @@ HTTP Response Status Codes  &nbsp;&nbsp; **200**
             "occupation": "PELAJAR/MAHASISWA",
             "nationality": "WNI",
             "expiry_date": "SEUMUR HIDUP",
-            "attachment": "https://storage.googleapis.com/my-bucket-05062022/04062022-090807.png"
+            "attachment": "https://storage.googleapis.com/id-cards-photo/u10rFTlsFwSaeAJ3d6DhcaCZqWX2.png"
         },
         {
-            "uid": "q6fvJpSVtIhS2XGqqH8L",
             "province": "JAWA TIMUR",
             "district": "KABUPATEN SIDOARJO",
             "id_number": "351XXXXXXXXXXXXX",
@@ -323,7 +370,7 @@ HTTP Response Status Codes  &nbsp;&nbsp; **200**
             "occupation": "PELAJAR/MAHASISWA",
             "nationality": "WNI",
             "expiry_date": "SEUMUR HIDUP",
-            "attachment": "https://storage.googleapis.com/my-bucket-05062022/04062022-090807.png"
+            "attachment": "https://storage.googleapis.com/id-cards-photo/u10rFTlsFwSaeAJ3d6DhcaCZqWX2.png"
         }
     ]
 }
@@ -334,92 +381,9 @@ HTTP Response Status Codes  &nbsp;&nbsp; **400**
 ```json
 {
     "status": "Bad Request",
-    "message": "Error message..."
+    "message": "No token provided."
 }
 ```
-
-HTTP Response Status Codes  &nbsp;&nbsp; **401**
-
-```json
-{
-    "status": "Unauthorized",
-    "message": "You do not have permissions to access the service."
-}
-```
-
-HTTP Response Status Codes  &nbsp;&nbsp; **404**
-
-```json
-{
-    "status": "Not Found",
-    "message": "The item/record not found."
-}
-```
-
-<br><br>
-
-**GET** &nbsp;&nbsp; `/id_cards/:uid`
-
-This method allows you to retrieve ID Card details.
-
-Authentication
-
-- [x] ID Tokens
-
-Path Parameters
-
-<table>
-  <tr>
-    <td>uid</td>
-    <td>string</td>
-    <td>A unique user ID</td>
-    <td><b>required</b></td>
-  </tr>
-</table>
-
-Headers
-
-<table>
-  <tr>
-    <td>Authorization</td>
-    <td>string</td>
-    <td>Bearer &lt;ID Tokens&gt;</td>
-    <td><b>required</b></td>
-  </tr>
-</table>
-
-Response &nbsp;&nbsp; `application/json`
-
-HTTP Response Status Codes  &nbsp;&nbsp; **200**
-
-```json
-{
-    "status": "OK",
-    "message": "The item/record was retrieved successfully.",
-    "data": {
-        "uid": "q6fvJpSVtIhS2XGqqH8L",
-        "province": "JAWA TIMUR",
-        "district": "KABUPATEN SIDOARJO",
-        "id_number": "351XXXXXXXXXXXXX",
-        "name": "MOCHAMMAD ARYA SALSABILA",
-        "place_date_of_birth": "SIDOARJO, 24-06-2001",
-        "gender": "LAKI-LAKI",
-        "blood_type": "-",
-        "address": "NGABAN",
-        "neighborhood": "005/002",
-        "village": "NGABAN",
-        "subdistrict": "TANGGULANGIN",
-        "religion": "ISLAM",
-        "marital_status": "BELUM KAWIN",
-        "occupation": "PELAJAR/MAHASISWA",
-        "nationality": "WNI",
-        "expiry_date": "SEUMUR HIDUP",
-        "attachment": "https://storage.googleapis.com/my-bucket-05062022/04062022-090807.png"
-    }
-}
-```
-
-HTTP Response Status Codes  &nbsp;&nbsp; **400**
 
 ```json
 {

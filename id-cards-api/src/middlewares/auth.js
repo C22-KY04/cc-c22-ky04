@@ -20,7 +20,8 @@ const isAuthenticated = async (req, res, next) => {
     const idToken = authorization.split('Bearer ')[1];
 
     try {
-      await admin.auth().verifyIdToken(idToken);
+      const decodedToken = await admin.auth().verifyIdToken(idToken);
+      req.currentUser = decodedToken;
     } catch {
       return res.status(401).json({
         status: 'Unauthorized',

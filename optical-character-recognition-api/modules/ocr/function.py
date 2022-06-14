@@ -1,7 +1,6 @@
 import re
 import cv2
 import nltk
-import fastwer
 import pytesseract
 import numpy as np
 from PIL import Image

@@ -45,6 +45,7 @@ a
 ab
 o
 b
+jawa
 rawa
 buaya
 c
@@ -72,3 +73,10 @@ x
 y
 z
 kewarganegaraan
+jawa
+-
+daerah
+pedagang
+karyawan swasta
+pelajarmahasiswa
+surabaya

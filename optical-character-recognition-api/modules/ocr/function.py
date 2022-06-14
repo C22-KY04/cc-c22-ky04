@@ -1,10 +1,17 @@
 import re
 import cv2
+import nltk
+import fastwer
 import pytesseract
 import numpy as np
 from PIL import Image
 from pytesseract import Output
 from collections import Counter
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from difflib import SequenceMatcher
+
+nltk.download("punkt")
 
 # Read Image =====================================================
 
@@ -76,18 +83,18 @@ def processing_word(list_value, WORDS):
         if string.isspace() or len(string)==0:
             continue
         lower_string = string.lower()
-        no_punc_string = re.sub(r'[^\w\s]','', lower_string)
-        no_wspace_string = no_punc_string.replace('\n', ' ')
-        no_punc_string = re.sub(r'[^\w\s]','', lower_string)
-        no_wspace_string = no_punc_string.replace('\n', ' ')
-        no_wspace_string = re.sub(' +', ' ', no_wspace_string)
+        no_punc_string = re.sub(r"[^\w\s]","", lower_string)
+        no_wspace_string = no_punc_string.replace("\n", " ")
+        no_punc_string = re.sub(r"[^\w\s]","", lower_string)
+        no_wspace_string = no_punc_string.replace("\n", " ")
+        no_wspace_string = re.sub(" +", " ", no_wspace_string)
         new_list.append(correction(no_wspace_string))
     return new_list
 
 def correction_typo(new_list):
     new_value = []
     for string in new_list:
-        temp = ''
+        temp = ""
         data = string.split(" ")
         for s in data:
             temp = temp + " " + correction(s)
@@ -95,7 +102,10 @@ def correction_typo(new_list):
     return new_value
 
 def get_kabupaten(new_value):
-    return new_value[1]
+    kabupaten = ""
+    if len(new_value) >= 2:
+        kabupaten = new_value[1]
+    return kabupaten
 
 # Get Value ======================================================
 
@@ -109,40 +119,64 @@ def txt_to_list(path):
 def get_pair(prevalue, new_value):
     pair = {}
     for string in new_value:
-        temp = string.split(' ')
+        temp = string.split(" ")
         new_temp = []
         flag = False
         keyFlag = False
-        key = ''
+        key = ""
         for word in temp:
             if flag == False and word in prevalue:
                 flag = True
                 keyFlag = True
                 key = word
             if flag and keyFlag:
-                pair[key] = ''
+                pair[key] = ""
                 keyFlag = False
             if flag and not keyFlag:
                 pair[key] = pair[key] + " " + word
     return pair
 
+def similar(a, b):
+    return SequenceMatcher(None, a, b).ratio()
+
+def fix_key(pair):
+    new_pair = {}
+    key_list = [
+        "provinsi", "kabupaten", "nik", "nama", "tempattgl", 
+        "kelamin", "keldesa", "rtrw", "kecamatan", "agama", 
+        "perkawinan", "pekerjaan", "kewarganegaraan","hingga"
+    ]
+    for string in pair.keys():
+        new_key = ""
+        max = 0
+        for s in key_list:
+            temp = similar(string, s)
+            if temp > max:
+                max = temp
+                new_key = s
+        if max > 0:
+            new_pair[new_key] = pair[string]
+        else:
+            new_pair[string] = pair[string]
+    return new_pair
+
 def processing_pair(pair, kabupaten):
     new_pair = {}
     for string in pair.keys():
-        if (string == 'kewarganegaraan' or
-                string == 'agama' or
-                string == 'hingga' or
-                string == 'perkawinan'):
-            temp = pair[string].split(' ')
+        if (string == "kewarganegaraan" or
+                string == "agama" or
+                string == "hingga" or
+                string == "perkawinan"):
+            temp = pair[string].split(" ")
             temp = temp[2:3]
-            new_pair[string] = ' '.join(temp)
-        elif string == 'tempattgl':
-            temp = pair[string].split(' ')
+            new_pair[string] = " ".join(temp)
+        elif string == "tempattgl":
+            temp = pair[string].split(" ")
             temp = temp[2:]
-            new_pair[string] = ' '.join(temp)
-            new_pair[string] = new_pair[string].replace('lahir ', '')
-        elif string == 'pekerjaan':
-            temp = pair[string].split(' ')
+            new_pair[string] = " ".join(temp)
+            new_pair[string] = new_pair[string].replace("lahir ", "")
+        elif string == "pekerjaan":
+            temp = pair[string].split(" ")
             temp = temp[2:]
             i = 0
             new_temp = []
@@ -163,18 +197,20 @@ def processing_pair(pair, kabupaten):
                     i = i+1
                     if i == len(temp)-1: 
                         break
-            new_pair[string] = ' '.join(new_temp)
+            new_pair[string] = " ".join(new_temp)
         else:
-            temp = pair[string].split(' ')
+            temp = pair[string].split(" ")
             temp = temp[2:]
-            new_pair[string] = ' '.join(temp)
-    new_pair['kabupaten'] = kabupaten
+            new_pair[string] = " ".join(temp)
+    new_pair["kabupaten"] = kabupaten
     return new_pair
 
 def get_blood_type(new_pair):
-    darah = new_pair['kelamin'].split(' ')
-    new_pair['kelamin'] = darah[0]
-    new_pair['darah'] = darah[-1]
+    list_key = new_pair.keys()
+    if "kelamin" in list_key:
+        darah = new_pair["kelamin"].split(" ")
+        new_pair["kelamin"] = darah[0]
+        new_pair["darah"] = darah[-1]
     return new_pair
 
 # Format Dictionary ==============================================
@@ -184,53 +220,53 @@ def format_dict(new_pair):
     
     new_dict = {}
 
-    if 'provinsi' in list_key:
-        new_dict['province'] = new_pair['provinsi']
+    if "provinsi" in list_key:
+        new_dict["province"] = new_pair["provinsi"]
 
-    if 'kabupaten' in list_key:
-        new_dict['district'] = new_pair['kabupaten']
+    if "kabupaten" in list_key:
+        new_dict["district"] = new_pair["kabupaten"]
 
-    if 'nik' in list_key:
-        new_dict['id_number'] = new_pair['nik']
+    if "nik" in list_key:
+        new_dict["id_number"] = new_pair["nik"]
 
-    if 'nama' in list_key:
-        new_dict['name'] = new_pair['nama']
+    if "nama" in list_key:
+        new_dict["name"] = new_pair["nama"]
 
-    if 'tempattgl' in list_key:
-        new_dict['place_date_of_birth'] = new_pair['tempattgl']
+    if "tempattgl" in list_key:
+        new_dict["place_date_of_birth"] = new_pair["tempattgl"]
 
-    if 'kelamin' in list_key:
-        new_dict['gender'] = new_pair['kelamin']
+    if "kelamin" in list_key:
+        new_dict["gender"] = new_pair["kelamin"]
 
-    if 'darah' in list_key:
-        new_dict['blood_type'] = new_pair['darah']
+    if "darah" in list_key:
+        new_dict["blood_type"] = new_pair["darah"]
 
-    if 'keldesa' in list_key:
-        new_dict['address'] = new_pair['keldesa']
+    if "keldesa" in list_key:
+        new_dict["address"] = new_pair["keldesa"]
 
-    if 'rtrw' in list_key:
-        new_dict['neighborhood'] = new_pair['rtrw']
+    if "rtrw" in list_key:
+        new_dict["neighborhood"] = new_pair["rtrw"]
 
-    if 'keldesa' in list_key:
-        new_dict['village'] = new_pair['keldesa']
+    if "keldesa" in list_key:
+        new_dict["village"] = new_pair["keldesa"]
 
-    if 'kecamatan' in list_key:
-        new_dict['subdistrict'] = new_pair['kecamatan']
+    if "kecamatan" in list_key:
+        new_dict["subdistrict"] = new_pair["kecamatan"]
 
-    if 'agama' in list_key:
-        new_dict['religion'] = new_pair['agama']
+    if "agama" in list_key:
+        new_dict["religion"] = new_pair["agama"]
 
-    if 'perkawinan' in list_key:
-        new_dict['marital_status'] = new_pair['perkawinan']
+    if "perkawinan" in list_key:
+        new_dict["marital_status"] = new_pair["perkawinan"]
 
-    if 'pekerjaan' in list_key:
-        new_dict['occupation'] = new_pair['pekerjaan']
+    if "pekerjaan" in list_key:
+        new_dict["occupation"] = new_pair["pekerjaan"]
 
-    if 'kewarganegaraan' in list_key:
-        new_dict['nationality'] = new_pair['kewarganegaraan']
+    if "kewarganegaraan" in list_key:
+        new_dict["nationality"] = new_pair["kewarganegaraan"]
 
-    if 'hingga' in list_key:
-        new_dict['expiry_date'] = new_pair['hingga']
+    if "hingga" in list_key:
+        new_dict["expiry_date"] = new_pair["hingga"]
 
     res = {}
 
@@ -256,12 +292,12 @@ def extract_text_from_image(url):
 
     prevalue = txt_to_list("./modules/ocr/key.txt")
     pair = get_pair(prevalue, new_value)
+    pair = fix_key(pair)
     new_pair = processing_pair(pair, kabupaten)
 
-    new_pair = processing_pair(pair, kabupaten)
     new_pair = get_blood_type(new_pair)
     new_dict = format_dict(new_pair)
 
-    new_dict['attachment'] = url
+    new_dict["attachment"] = url
 
     return new_dict

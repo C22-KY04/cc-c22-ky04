@@ -13,6 +13,7 @@ COPY . ./
 # Install production dependencies.
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
+RUN [ "python3", "-c", "import nltk; nltk.download('punkt')" ]
 
 #Install tesseract
 RUN apt-get update -qqy && apt-get install -qqy \

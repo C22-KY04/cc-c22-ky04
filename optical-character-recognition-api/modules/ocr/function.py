@@ -10,8 +10,6 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from difflib import SequenceMatcher
 
-nltk.download("punkt")
-
 # Read Image =====================================================
 
 def read_image():

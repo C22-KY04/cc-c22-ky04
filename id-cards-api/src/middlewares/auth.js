@@ -1,34 +1,35 @@
-const admin = require('../config/firebase');
+const admin = require('firebase-admin');
 
-const getIdToken = (req, res, next) => {
-  const authHeader = req.headers.authorization;
+const serviceAccount = require('../../serviceAccountKey.json');
 
-  if (authHeader.startsWith('Bearer ')) {
-    req.idToken = authHeader.split('Bearer ').pop();
-  } else {
-    req.idToken = null;
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
+
+const isAuthenticated = async (req, res, next) => {
+  const { authorization } = req.headers;
+
+  if (!authorization) {
+    return res.status(400).json({
+      status: 'Bad Request',
+      message: 'No token provided.',
+    });
   }
 
-  next();
-};
+  if (authorization.startsWith('Bearer ')) {
+    const idToken = authorization.split('Bearer ')[1];
 
-const isAuthenticated = (req, res, next) => {
-  getIdToken(req, res, async () => {
     try {
-      const { idToken } = req;
-
-      await admin
-        .auth()
-        .verifyIdToken(idToken);
-
-      return next();
-    } catch (error) {
+      await admin.auth().verifyIdToken(idToken);
+    } catch {
       return res.status(401).json({
         status: 'Unauthorized',
         message: 'You do not have permissions to access the service.',
       });
     }
-  });
+  }
+
+  return next();
 };
 
 module.exports = isAuthenticated;

@@ -153,6 +153,7 @@ def fix_key(pair):
                 new_key = s
         if max > 0:
             new_pair[new_key] = pair[string]
+            key_list.remove(new_key)
         else:
             new_pair[string] = pair[string]
     return new_pair

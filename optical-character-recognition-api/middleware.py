@@ -21,7 +21,8 @@ def is_authenticated(func):
             id_token = authorization.split("Bearer ")[1]
 
             try:
-                auth.verify_id_token(id_token)
+                decoded_token = auth.verify_id_token(id_token)
+                request.current_user = decoded_token
             except Exception as e:
                 return jsonify({
                     "status": "Unauthorized",

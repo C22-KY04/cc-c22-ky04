@@ -1,7 +1,5 @@
 const express = require('express');
-const {
-  createIdCard, getIdCards,
-} = require('../controllers/idcards');
+const { createIdCard, getIdCards } = require('../controllers/idcards');
 
 const router = express.Router();
 

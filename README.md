@@ -1,3 +1,29 @@
+## Table of Contents
+
+<details open>
+  <summary><b>(click to expand or hide)</b></summary>
+
+  1. [Cloud Architecture Diagram](#cloud-architecture-diagram)
+  1. [Billing Cost](#billing-cost)
+  1. [Getting Started](#getting-started)
+      - [Prerequisites](#prerequisites)
+      - [Setup](#setup)
+  1. [Securing a REST API with JWT](#securing-a-rest-api-with-jwt)
+  1. [Optical Character Recognition API](#optical-character-recognition-api)
+      - [Workflow](#workflow-1)
+      - [Base URL](#base-url-1)
+      - [Routing](#routing-1)
+  1. [ID Cards API](#id-cards-api)
+      - [Workflow](#workflow-2)
+      - [Base URL](#base-url-2)
+      - [Routing](#routing-2)
+  1. [License](#license)
+  1. [Contact](#contact)
+
+</details>
+
+<br><br>
+
 ## Cloud Architecture Diagram
 
 ![](cloud-architecture-diagram.png)
@@ -39,6 +65,115 @@ See more detail [here](https://cloud.google.com/products/calculator/#id=05305aa6
 
 <br><br>
 
+## Getting Started
+
+### Prerequisites
+
+- Firebase project.
+- Google Cloud Platform project and billing enabled.
+
+### Setup
+
+**Firebase:**
+
+1. In the [Firebase Console](https://console.firebase.google.com/), click **Add project** to create a Firebase project.
+2. Click **Authentication** from the **left hand menu**. Select **Sign-in method tab** and click **Add new provider**. Add provider for Email/Password, Google, and Facebook.
+3. Select **Users tab** and click **Add user** to create a new user. Later this user will be used by the Cloud Computing team to generate tokens when testing REST API.
+4. Click **Project Overview** from the **left hand menu**. Then click Add app to register Web Applications (only to generate token when testing REST API).
+5. Click **Project settings** next to **Project Overview**. Then select **Service accounts tab** and click **Generate new private key**. Save it as `serviceAccountKey.json`.
+6. Still in the **Project Settings**, select **Users and permissions tab** and click **Add member** to add the Mobile Development team so they can register Android App Applications.
+
+**Google Cloud Platform:**
+
+1. In the [Google Cloud Platform Console](https://console.cloud.google.com/), click **Navigation menu** > **Cloud Storage** > **Browser**.
+2. Click **Create Bucket**. Set the following values, leave all other values at their defaults:
+
+    | Property | Value (type value or select option as specified) |
+    | --- | --- |
+    | Name | id-cards-photo |
+    | Location type and Location | Region, asia-southeast2 (Jakarta) |
+    | Default storage class | Standard |
+    | Access control | Fine-grained |
+
+3. Click **Create**, then click **Browser** from the **left hand menu**. Check the bucket that was created earlier, then click three dots to the right of the bucket, then select **Edit access**.
+5. Click **Add Principal**. Set the following values, leave all other values at their defaults:
+
+    | Property | Value (type value or select option as specified) |
+    | --- | --- |
+    | New principals | allUsers |
+    | Role | Storage Object Viewer |
+
+6. Click **Save**, then click **Allow Public Access** when the popup appears.
+7. Click **Navigation menu** > **Firestore**.
+8. Click **Select Native Mode** button.
+9. In the **Select a location** dropdown, choose **asia-southeast2 (Jakarta)**, then click **Create Database**.
+10. In the top right toolbar, click the **Activate Cloud Shell** button.
+11. From **Cloud Shell**, enable the **Container Registry**, **Cloud Build**, and **Cloud Run APIs**:
+
+    ```shell
+    gcloud services enable \
+      containerregistry.googleapis.com \
+      cloudbuild.googleapis.com \
+      run.googleapis.com
+    ```
+
+12. Clone this repository.
+
+    ```shell
+    git clone https://github.com/C22-KY04/cc-c22-ky04.git
+    ```
+
+13. Click **Open Editor button** on the **Cloud Shell Terminal toolbar**. Then upload the `serviceAccountKey.json` (**obtained from step 5 of Firebase setup**) to the root directory:
+
+    - `cc-c22-ky04/id-cards-api`
+    - `cc-c22-ky04/optical-character-recognition-api`
+
+14. If you create a bucket with a different name from **step 2 of the Google Cloud Platform setup**, then replace the bucket name in the `cc-c22-ky04/optical-character-recognition-api/app.py` on line 44.
+
+    ```Python
+    # Replace with the name of the bucket you created
+    bucket_name = "id-cards-photo"
+    ```
+
+15. Don't forget to change your **Google Cloud Platform Project ID** in the `deploy.sh` located at:
+
+    - `cc-c22-ky04/id-cards-api/deploy.sh`
+    - `cc-c22-ky04/optical-character-recognition-api/deploy.sh`
+
+16. Run the following command to deploy Optical Character Recognition API to Cloud Run:
+
+    ```shell
+    cd ~/cc-c22-ky04/optical-character-recognition-api
+
+    chmod +x deploy.sh
+
+    ./deploy.sh
+    ```
+
+    Wait a few moments until the deployment is complete. If successful, the command line displays the service URL. Open the service URL in any browser window and you will get the result:
+
+    ```json
+    "Hello from Optical Character Recognition API, C22-KY04."
+    ```
+
+17. Click **Open Terminal button** on the **Cloud Shell Editor toolbar**. Run the following command to deploy ID Cards API to Cloud Run:
+
+    ```shell
+    cd ~/cc-c22-ky04/id-cards-api
+
+    chmod +x deploy.sh
+
+    ./deploy.sh
+    ```
+
+    Wait a few moments until the deployment is complete. If successful, the command line displays the service URL. Open the service URL in any browser window and you will get the result:
+
+    ```json
+    "Hello from ID Cards API, C22-KY04."
+    ```
+
+<br><br>
+
 ## Securing a REST API with JWT
 
 ![](securing-a-rest-api-with-jwt.png)
@@ -51,9 +186,9 @@ Description:
 
 ## Optical Character Recognition API
 
-Create REST API using [Python](https://www.python.org/), [Flask](https://flask.palletsprojects.com/en/2.1.x/), [TensorFlow](https://www.tensorflow.org), [Cloud Run](https://cloud.google.com/run), and [Cloud Storage](https://cloud.google.com/storage)
+Create REST API using [Python](https://www.python.org/), [Flask](https://flask.palletsprojects.com/en/2.1.x/), [TensorFlow](https://www.tensorflow.org), [PyTesseract](https://pypi.org/project/pytesseract/), [Cloud Run](https://cloud.google.com/run), and [Cloud Storage](https://cloud.google.com/storage)
 
-### Workflow
+### Workflow <a id="workflow-1"></a>
 
 ![](optical-character-recognition-api.png)
 
@@ -66,7 +201,7 @@ Description:
 6. Collect ID Card (KTP) details using PyTesseract (Python Tesseract).
 7. Then send the results to the Android Application for re-validation.
 
-### Base URL
+### Base URL <a id="base-url-1"></a>
 
 https://ocr-api-5igfi42iaq-et.a.run.app
 
@@ -76,7 +211,7 @@ Response `string`
 "Hello from Optical Character Recognition API, C22-KY04."
 ```
 
-### Routing
+### Routing <a id="routing-1"></a>
 
 **POST** &nbsp;&nbsp; `/ocr`
 
@@ -190,9 +325,9 @@ HTTP Response Status Codes  &nbsp;&nbsp; **500**
 
 ## ID Cards API
 
-Create a REST API using [Node.js](https://nodejs.org/en/), [Express](https://expressjs.com/), [Firebase Auth](https://firebase.google.com/docs/auth), [Cloud Run](https://cloud.google.com/run), and [Cloud Firestore](https://cloud.google.com/firestore).
+Create a REST API using [Node.js](https://nodejs.org/en/), [Express](https://expressjs.com/), [Firebase Auth](https://firebase.google.com/products/auth), [Cloud Run](https://cloud.google.com/run), and [Cloud Firestore](https://cloud.google.com/firestore).
 
-### Workflow
+### Workflow <a id="workflow-2"></a>
 
 ![](id-cards-api.png)
 
@@ -202,7 +337,7 @@ Description:
     - `GET` to retrieve entire ID Cards, or retrieve some ID Cards by name.
 2. If the HTTP Request Method sent is `POST`, the ID Card (KTP) details will be saved to Cloud Firestore.
 
-### Base URL
+### Base URL <a id="base-url-2"></a>
 
 https://id-cards-api-yil5spdsaq-et.a.run.app
 
@@ -212,7 +347,7 @@ Response `string`
 "Hello from ID Cards API, C22-KY04."
 ```
 
-### Routing
+### Routing <a id="routing-2"></a>
 
 **POST** &nbsp;&nbsp; `/id_cards`
 
@@ -409,3 +544,15 @@ HTTP Response Status Codes  &nbsp;&nbsp; **404**
     "message": "The item/record not found."
 }
 ```
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+## Contact
+
+| Member | Student ID | LinkedIn |
+| --- | --- | --- |
+| Mochammad Arya Salsabila | C7296F2513 | [LinkedIn](https://www.linkedin.com/in/mochammad-arya-salsabila/) |
+| Bayu Eka Prawira | C2004F0300 | [LinkedIn](https://www.linkedin.com/in/bayuekaprawira/) |
+| Ariasatya Mahatma | C7004F0171 | [LinkedIn](linkedin.com/in/ariasatya/) |

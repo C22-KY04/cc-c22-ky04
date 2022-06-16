@@ -21,8 +21,6 @@ def base_url():
 @app.route("/ocr", methods=["POST"])
 @is_authenticated
 def optical_character_recognition():
-    # current_user = request.current_user
-
     if "file" not in request.files:
         return jsonify({
             "status": "Bad Request",
@@ -44,7 +42,6 @@ def optical_character_recognition():
         }), 406
 
     bucket_name = "id-cards-photo"
-    # blob_name = current_user.get("uid")
     blob_name = datetime.now().strftime("%d%m%Y-%H%M%S")
     destination_blob_name = "{}.png".format(blob_name)
     public_url = upload_to_bucket(bucket_name, source_file_name, destination_blob_name)

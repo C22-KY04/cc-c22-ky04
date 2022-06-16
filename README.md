@@ -63,8 +63,8 @@ See more detail [here](https://cloud.google.com/products/calculator/#id=05305aa6
 
 1. In the [Firebase Console](https://console.firebase.google.com/), click **Add project** to create a Firebase project.
 1. Click **Authentication** from the **left hand menu**. Select **Sign-in method** tab and click **Add new provider**. Add provider for Email/Password, Google, and Facebook.
-1. Select **Users tab** and click **Add user** to create a new user. Later this user will be used by the Cloud Computing team to generate tokens when testing REST API.
-1. Click **Project Overview** from the **left hand menu**. Then click **Add app** to register Web Applications (only to generate token when testing REST API).
+1. Select **Users tab** and click **Add user** to create a new user. Later this user will be used by the Cloud Computing team to [generate tokens](https://github.com/C22-KY04/cc-c22-ky04/tree/master/generate-token) when testing REST API.
+1. Click **Project Overview** from the **left hand menu**. Then click Add application to register the Web Application. This app is used to [generate tokens](https://github.com/C22-KY04/cc-c22-ky04/tree/master/generate-token).
 1. Click **Project settings** next to **Project Overview**. Then select **Service accounts** tab and click **Generate new private key**. Save it as `serviceAccountKey.json`.
 1. Still in the **Project Settings**, select **Users and permissions** tab and click **Add member** to add the Mobile Development team so they can register Android App Applications.
 
@@ -105,10 +105,10 @@ See more detail [here](https://cloud.google.com/products/calculator/#id=05305aa6
 
 1. Click **Open Editor** button on the **Cloud Shell Terminal** toolbar. Then upload the `serviceAccountKey.json` obtained from step 5 of Firebase setup to the root directory:
 
-    - `cc-c22-ky04/id-cards-api`
-    - `cc-c22-ky04/optical-character-recognition-api`
+    - [cc-c22-ky04/id-cards-api](https://github.com/C22-KY04/cc-c22-ky04/tree/master/id-cards-api)
+    - [cc-c22-ky04/optical-character-recognition-api](https://github.com/C22-KY04/cc-c22-ky04/tree/master/optical-character-recognition-api)
 
-1. If you create a bucket with a different name from step 2 of the Google Cloud Platform setup, then replace the bucket name in the `cc-c22-ky04/optical-character-recognition-api/app.py` on line 44:
+1. If you create a bucket with a different name from step 2 of the Google Cloud Platform setup, then replace the bucket name in the [cc-c22-ky04/optical-character-recognition-api/app.py](https://github.com/C22-KY04/cc-c22-ky04/blob/master/optical-character-recognition-api/app.py) on line 44:
 
     ```Python
     # Replace with the name of the bucket you created
@@ -117,8 +117,8 @@ See more detail [here](https://cloud.google.com/products/calculator/#id=05305aa6
 
 1. Don't forget to change your **Google Cloud Platform Project ID** in the `deploy.sh` located at:
 
-    - `cc-c22-ky04/id-cards-api/deploy.sh`
-    - `cc-c22-ky04/optical-character-recognition-api/deploy.sh`
+    - [cc-c22-ky04/id-cards-api/deploy.sh](https://github.com/C22-KY04/cc-c22-ky04/blob/master/id-cards-api/deploy.sh)
+    - [cc-c22-ky04/optical-character-recognition-api/deploy.sh](https://github.com/C22-KY04/cc-c22-ky04/blob/master/optical-character-recognition-api/deploy.sh)
 
 1. Run the following command to deploy Optical Character Recognition API to Cloud Run:
 

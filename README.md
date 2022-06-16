@@ -545,9 +545,13 @@ HTTP Response Status Codes  &nbsp;&nbsp; **404**
 }
 ```
 
+<br><br>
+
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
+
+<br><br>
 
 ## Contact
 

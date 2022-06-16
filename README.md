@@ -1,6 +1,6 @@
 ## Table of Contents
 
-<details open>
+<details>
   <summary><b>(click to expand or hide)</b></summary>
 
   1. [Cloud Architecture Diagram](#cloud-architecture-diagram)
@@ -22,7 +22,7 @@
 
 </details>
 
-<br><br>
+<br>
 
 ## Cloud Architecture Diagram
 
@@ -30,7 +30,7 @@
 
 See more detail [here](https://www.figma.com/file/bXdu32FvMX29idjgUkxKXN/Google-Cloud-Diagram?node-id=0%3A1)
 
-<br><br>
+<br>
 
 ## Billing Cost
 Estimated billing cost that's used in this projects:
@@ -63,7 +63,7 @@ Estimated billing cost that's used in this projects:
 
 See more detail [here](https://cloud.google.com/products/calculator/#id=05305aa6-1fa2-442f-9ebc-2b7ed1af4125)
 
-<br><br>
+<br>
 
 ## Getting Started
 
@@ -172,7 +172,7 @@ See more detail [here](https://cloud.google.com/products/calculator/#id=05305aa6
     "Hello from ID Cards API, C22-KY04."
     ```
 
-<br><br>
+<br>
 
 ## Securing a REST API with JWT
 
@@ -182,7 +182,7 @@ Description:
 1. Firebase Authentication will send JWT token to Android Application.
 2. Android Application will send the JWT token to the Cloud Run Service. Then Cloud Run Service will validate the token, so only authenticated users can make requests.
 
-<br><br>
+<br>
 
 ## Optical Character Recognition API
 
@@ -321,7 +321,7 @@ HTTP Response Status Codes  &nbsp;&nbsp; **500**
 }
 ```
 
-<br><br>
+<br>
 
 ## ID Cards API
 
@@ -428,7 +428,7 @@ HTTP Response Status Codes  &nbsp;&nbsp; **401**
 }
 ```
 
-<br><br>
+<br>
 
 **GET** &nbsp;&nbsp; `/id_cards`
 
@@ -545,13 +545,13 @@ HTTP Response Status Codes  &nbsp;&nbsp; **404**
 }
 ```
 
-<br><br>
+<br>
 
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-<br><br>
+<br>
 
 ## Contact
 

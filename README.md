@@ -179,7 +179,7 @@ Description:
 
 ### Base URL
 
-https://ocr-api-5igfi42iaq-et.a.run.app
+https://ocr-api-s77adt3hmq-et.a.run.app
 
 Response `string`
 
@@ -313,7 +313,7 @@ Description:
 
 ### Base URL
 
-https://id-cards-api-yil5spdsaq-et.a.run.app
+https://id-cards-api-s77adt3hmq-et.a.run.app
 
 Response `string`
 
